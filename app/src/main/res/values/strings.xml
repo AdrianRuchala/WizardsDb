@@ -7,4 +7,7 @@
     <string name="ghost">Ghost:</string>
     <string name="room">Room:</string>
     <string name="element">Element:</string>
+    <string name="houses">Houses</string>
+    <string name="spells">Spells</string>
+    <string name="elixirs">Elixirs</string>
 </resources>
