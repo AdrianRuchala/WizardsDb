@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">WizardDb</string>
+    <string name="heads">House:</string>
+    <string name="founder">Founder:</string>
+    <string name="colours">Colours:</string>
+    <string name="animal">Animal:</string>
+    <string name="ghost">Ghost:</string>
+    <string name="room">Room:</string>
+    <string name="element">Element:</string>
+</resources>
