@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.droidcode.apps.wizarddb.R
 import com.droidcode.apps.wizarddb.WizardsViewModel
 import com.droidcode.apps.wizarddb.data.House
+import com.droidcode.apps.wizarddb.data.Spell
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -84,9 +85,9 @@ fun MainScreen(modifier: Modifier, viewModel: WizardsViewModel) {
                         HousePlate(Modifier.padding(8.dp), house)
                     }
                 } else if (selectedTabIndex == 1) {
-
-                    //TODO
-
+                    items(viewModel.spellState.value) { spell ->
+                        SpellPlate(Modifier.padding(8.dp), spell)
+                    }
                 } else {
 
                     //TODO
@@ -204,6 +205,111 @@ fun HousePlate(modifier: Modifier, houseState: House) {
                 }
             }
 
+        }
+    }
+}
+
+@Composable
+fun SpellPlate(modifier: Modifier, spellState: Spell) {
+    var extendList by remember { mutableStateOf(false) }
+
+    Column(
+        modifier
+            .fillMaxWidth()
+            .border(2.dp, MaterialTheme.colorScheme.primary, MaterialTheme.shapes.small)
+            .background(
+                color = MaterialTheme.colorScheme.primaryContainer,
+                shape = MaterialTheme.shapes.small
+            )
+            .padding(8.dp),
+    ) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    extendList = !extendList
+                },
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                spellState.name,
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        extendList = !extendList
+                    }
+            )
+        }
+        if (extendList) {
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .padding(vertical = 8.dp)
+            ) {
+                if (spellState.incantation?.isNotEmpty() == true) {
+                    Row(Modifier.fillMaxWidth()) {
+                        Text(
+                            stringResource(R.string.incantation),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Spacer(Modifier.padding(horizontal = 2.dp))
+                        Text(spellState.incantation)
+                    }
+                }
+
+                Row(Modifier.fillMaxWidth()) {
+                    Text(
+                        stringResource(R.string.spell_effect),
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    Spacer(Modifier.padding(horizontal = 2.dp))
+                    Text(spellState.effect)
+                }
+
+                Row(Modifier.fillMaxWidth()) {
+                    Text(
+                        stringResource(R.string.can_be_verbal),
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    Spacer(Modifier.padding(horizontal = 2.dp))
+                    Text(spellState.canBeVerbal.toString())
+                }
+
+                if (spellState.type?.isNotEmpty() == true) {
+                    Row(Modifier.fillMaxWidth()) {
+                        Text(
+                            stringResource(R.string.type),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Spacer(Modifier.padding(horizontal = 2.dp))
+                        Text(spellState.type)
+                    }
+                }
+
+                if (spellState.light?.isNotEmpty() == true) {
+                    Row(Modifier.fillMaxWidth()) {
+                        Text(
+                            stringResource(R.string.light),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Spacer(Modifier.padding(horizontal = 2.dp))
+                        Text(spellState.light)
+                    }
+                }
+
+                if (spellState.creator?.isNotEmpty() == true) {
+                    Row(Modifier.fillMaxWidth()) {
+                        Text(
+                            stringResource(R.string.creator),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Spacer(Modifier.padding(horizontal = 2.dp))
+                        Text(spellState.creator)
+                    }
+                }
+            }
         }
     }
 }

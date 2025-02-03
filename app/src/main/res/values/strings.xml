@@ -10,4 +10,10 @@
     <string name="houses">Houses</string>
     <string name="spells">Spells</string>
     <string name="elixirs">Elixirs</string>
+    <string name="incantation">Incantation:</string>
+    <string name="spell_effect">Spell effect:</string>
+    <string name="can_be_verbal">Can be verbal:</string>
+    <string name="type">Type:</string>
+    <string name="light">Light:</string>
+    <string name="creator">Creator:</string>
 </resources>
