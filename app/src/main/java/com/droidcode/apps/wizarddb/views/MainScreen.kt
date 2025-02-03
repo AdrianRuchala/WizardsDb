@@ -32,6 +32,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.droidcode.apps.wizarddb.R
 import com.droidcode.apps.wizarddb.WizardsViewModel
+import com.droidcode.apps.wizarddb.data.Elixir
 import com.droidcode.apps.wizarddb.data.House
 import com.droidcode.apps.wizarddb.data.Spell
 
@@ -89,9 +90,9 @@ fun MainScreen(modifier: Modifier, viewModel: WizardsViewModel) {
                         SpellPlate(Modifier.padding(8.dp), spell)
                     }
                 } else {
-
-                    //TODO
-
+                    items(viewModel.elixirState.value) { elixir ->
+                        ElixirPlate(Modifier.padding(8.dp), elixir)
+                    }
                 }
             }
         }
@@ -307,6 +308,145 @@ fun SpellPlate(modifier: Modifier, spellState: Spell) {
                         )
                         Spacer(Modifier.padding(horizontal = 2.dp))
                         Text(spellState.creator)
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ElixirPlate(modifier: Modifier, elixirState: Elixir) {
+    var extendList by remember { mutableStateOf(false) }
+
+    Column(
+        modifier
+            .fillMaxWidth()
+            .border(2.dp, MaterialTheme.colorScheme.primary, MaterialTheme.shapes.small)
+            .background(
+                color = MaterialTheme.colorScheme.primaryContainer,
+                shape = MaterialTheme.shapes.small
+            )
+            .padding(8.dp),
+    ) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    extendList = !extendList
+                },
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                elixirState.name,
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        extendList = !extendList
+                    }
+            )
+        }
+        if (extendList) {
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .padding(vertical = 8.dp)
+            ) {
+                if (elixirState.effect?.isNotEmpty() == true) {
+                    Row(Modifier.fillMaxWidth()) {
+                        Text(
+                            stringResource(R.string.effect),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Spacer(Modifier.padding(horizontal = 2.dp))
+                        Text(elixirState.effect)
+                    }
+                }
+
+                if (elixirState.sideEffects?.isNotEmpty() == true) {
+                    Row(Modifier.fillMaxWidth()) {
+                        Text(
+                            stringResource(R.string.side_effects),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Spacer(Modifier.padding(horizontal = 2.dp))
+                        Text(elixirState.sideEffects)
+                    }
+                }
+
+                if (elixirState.characteristics?.isNotEmpty() == true) {
+                    Row(Modifier.fillMaxWidth()) {
+                        Text(
+                            stringResource(R.string.characteristics),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Spacer(Modifier.padding(horizontal = 2.dp))
+                        Text(elixirState.characteristics)
+                    }
+                }
+
+                if (elixirState.time?.isNotEmpty() == true) {
+                    Row(Modifier.fillMaxWidth()) {
+                        Text(
+                            stringResource(R.string.time),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Spacer(Modifier.padding(horizontal = 2.dp))
+                        Text(elixirState.time)
+                    }
+                }
+
+                if (elixirState.difficulty?.isNotEmpty() == true) {
+                    Row(Modifier.fillMaxWidth()) {
+                        Text(
+                            stringResource(R.string.difficulty),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Spacer(Modifier.padding(horizontal = 2.dp))
+                        Text(elixirState.difficulty)
+                    }
+                }
+
+                if (elixirState.ingredients.isNotEmpty()) {
+                    Row(Modifier.fillMaxWidth()) {
+                        Text(
+                            stringResource(R.string.ingredients),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Spacer(Modifier.padding(horizontal = 2.dp))
+                        Column {
+                            elixirState.ingredients.forEach { ingredient ->
+                                Text(ingredient.name)
+                            }
+                        }
+                    }
+                }
+
+                if (elixirState.inventors.isNotEmpty()) {
+                    Row(Modifier.fillMaxWidth()) {
+                        Text(
+                            stringResource(R.string.inventors),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Spacer(Modifier.padding(horizontal = 2.dp))
+                        Column {
+                            elixirState.inventors.forEach { inventor ->
+                                Text("${inventor.firstName} ${inventor.lastName}")
+                            }
+                        }
+                    }
+                }
+
+                if (elixirState.manufacturer?.isNotEmpty() == true) {
+                    Row(Modifier.fillMaxWidth()) {
+                        Text(
+                            stringResource(R.string.manufacturer),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Spacer(Modifier.padding(horizontal = 2.dp))
+                        Text(elixirState.manufacturer)
                     }
                 }
             }

@@ -16,4 +16,12 @@
     <string name="type">Type:</string>
     <string name="light">Light:</string>
     <string name="creator">Creator:</string>
+    <string name="effect">Effect:</string>
+    <string name="side_effects">Side effects:</string>
+    <string name="characteristics">Characteristics:</string>
+    <string name="time">Time:</string>
+    <string name="difficulty">Difficulty:</string>
+    <string name="ingredients">Ingredients:</string>
+    <string name="inventors">Inventors:</string>
+    <string name="manufacturer">Manufacturer:</string>
 </resources>
